@@ -7,13 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CourbeApplication extends Application {
+public class CurveApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(
-                CourbeApplication.class.getResource("main-view.fxml"));
+                CurveApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        stage.setTitle("Courbe");
+        stage.setTitle("Curve");
         stage.setScene(scene);
         stage.show();
     }
