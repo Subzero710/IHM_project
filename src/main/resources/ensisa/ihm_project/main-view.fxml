@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ensisa.ihm_project.MainController">
     <top>
@@ -16,20 +17,23 @@
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Delete" />
-                  <MenuItem mnemonicParsing="false" text="Linearize" />
+                        <MenuItem mnemonicParsing="false" onAction="#lineariserAction" text="Linearize" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
     </top>
-   <center>
-      <LineChart alternativeColumnFillVisible="true" horizontalGridLinesVisible="false" BorderPane.alignment="CENTER">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </LineChart>
-   </center>
+    <center>
+        <Pane fx:id="drawArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="255.0" style="-fx-background-color: #fff; -fx-border-color: #eee;" BorderPane.alignment="CENTER">
+            <children>
+                <Line endY="255.0" stroke="BLACK" />
+                <Line endX="255.0" endY="255.0" startY="255.0" stroke="BLACK" />
+
+                <Polyline fx:id="courbePolyline" fill="TRANSPARENT" stroke="BLACK" strokeWidth="2.0" />
+            </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+        </Pane>
+    </center>
 </BorderPane>

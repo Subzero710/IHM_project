@@ -7,7 +7,7 @@ import java.util.List;
 public class Courbe {
     private int n;
     private List<Point> points;
-
+/*
     public Courbe() {
         this.n = 4;
         points = new ArrayList<>();
@@ -16,21 +16,32 @@ public class Courbe {
             points.add(new Point(val,0));
         }
     }
+
     public Courbe(int n) {
         if (n<4) n=4;
         if (n>8) n=8;
         else this.n = n;
         for (int i = 0; i < n; i++) {
             double val = 255.0 * i / (n - 1);
-            points.add(new Point(val,0));
+            points.add(new Point(val,val));
         }
+    }
+*/
+
+    public Courbe(int n) {
+        if (n < 4) n = 4;
+        if (n > 8) n = 8;
+        this.n = n;
+
+        points = new ArrayList<>();
+        lineariser();
     }
 
     //Poynome de Lagrange
     public double lagrange(double x, int i) {
         double produit = 1;
         double xi = points.get(i).getX();
-        for (int j = 0; j < n-1; j++) {
+        for (int j = 0; j < n; j++) {
             if (i != j) {
                 double xj = points.get(j).getX();
                 produit *= (x - xj) / (xi - xj);
@@ -42,7 +53,7 @@ public class Courbe {
     // Calcule polynome en x
     public double polynome(double x) {
         double Px = 0;
-        for (int i = 0; i < n -1; i++) {
+        for (int i = 0; i < n ; i++) {
             double yi = points.get(i).getY();
             Px += yi * lagrange(x, i);
         }
@@ -52,4 +63,23 @@ public class Courbe {
         return Px;
     }
 
+    public void lineariser() {
+        points.clear();
+        for (int i = 0; i < n; i++) {
+            double val = 255.0 * i / (n - 1);
+            points.add(new Point(val, val));
+        }
+    }
+
+    public void setPointY(int i, double y) {
+        if (0 <= i && i < n) {
+            if (y < 0) y = 0;
+            if (y > 255) y = 255;
+            points.get(i).setY(y);
+        }
+    }
+
+    public List<Point> getPoints() {
+        return points;
+    }
 }
