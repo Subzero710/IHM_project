@@ -3,9 +3,8 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ensisa.ihm_project.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ensisa.ihm_project.MainController">
     <top>
         <MenuBar accessibleText="File" BorderPane.alignment="CENTER">
             <menus>
@@ -16,23 +15,52 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <!-- <MenuItem mnemonicParsing="false" text="Delete" /> -->
                         <MenuItem mnemonicParsing="false" onAction="#lineariserAction" text="Linearize" />
+                  <Menu mnemonicParsing="false" text="Number points">
+                    <items>
+                        <RadioMenuItem mnemonicParsing="false" onAction="#changerNbPointsAction" text="4" />
+                        <RadioMenuItem mnemonicParsing="false" onAction="#changerNbPointsAction" text="5" />
+                        <RadioMenuItem mnemonicParsing="false" onAction="#changerNbPointsAction" text="6" />
+                        <RadioMenuItem mnemonicParsing="false" onAction="#changerNbPointsAction" text="7" />
+                        <RadioMenuItem mnemonicParsing="false" onAction="#changerNbPointsAction" text="8" />
+                    </items>
+                  </Menu>
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
     </top>
-    <center>
-        <Pane fx:id="drawArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #fff; -fx-border-color: #eee;" BorderPane.alignment="CENTER">
-            <children>
-                <Line startX="20.0" startY="20.0" endX="20.0" endY="275.0" stroke="BLACK" />
-                <Line startX="20.0" startY="275.0" endX="275.0" endY="275.0" stroke="BLACK" />
-                <Polyline fx:id="courbePolyline" fill="TRANSPARENT" stroke="BLACK" strokeWidth="2.0" />
-            </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-        </Pane>
-    </center>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Red" />
+                    <Pane fx:id="drawAreaRed" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #fff; -fx-border-color: #eee;">
+                    </Pane>
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Green" />
+                  <Pane fx:id="drawAreaGreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #fff; -fx-border-color: #eee;">
+
+                  </Pane>
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Blue" />
+                  <Pane fx:id="drawAreaBlue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #fff; -fx-border-color: #eee;">
+
+                  </Pane>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </center>
 </BorderPane>
