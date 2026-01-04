@@ -19,8 +19,8 @@ public class MainController {
     private Pane drawArea;
     @FXML
     private Polyline courbePolyline;
-    private static final double MARGIN_LEFT = 0.0;
-    private static final double MARGIN_BOTTOM = 255.0;
+    private static final double MARGIN_LEFT = 20.0;
+    private static final double MARGIN_BOTTOM = 275.0;
 
     @FXML
     private void quitMenuAction() {

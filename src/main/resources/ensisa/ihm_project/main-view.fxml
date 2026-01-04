@@ -24,11 +24,10 @@
         </MenuBar>
     </top>
     <center>
-        <Pane fx:id="drawArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="255.0" style="-fx-background-color: #fff; -fx-border-color: #eee;" BorderPane.alignment="CENTER">
+        <Pane fx:id="drawArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #fff; -fx-border-color: #eee;" BorderPane.alignment="CENTER">
             <children>
-                <Line endY="255.0" stroke="BLACK" />
-                <Line endX="255.0" endY="255.0" startY="255.0" stroke="BLACK" />
-
+                <Line startX="20.0" startY="20.0" endX="20.0" endY="275.0" stroke="BLACK" />
+                <Line startX="20.0" startY="275.0" endX="275.0" endY="275.0" stroke="BLACK" />
                 <Polyline fx:id="courbePolyline" fill="TRANSPARENT" stroke="BLACK" strokeWidth="2.0" />
             </children>
          <BorderPane.margin>
