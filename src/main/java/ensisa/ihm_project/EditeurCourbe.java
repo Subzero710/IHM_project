@@ -9,15 +9,28 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polyline;
 
 public class EditeurCourbe {
+    public interface PointCommitListener {
+        void onPointCommit(Courbe courbe, int index, double oldY, double newY);
+    }
+
     private final Pane drawArea;
     private final Courbe modele;
     private final Polyline courbePolyline;
     private final double MARGIN = 20.0;
     private final double HEIGHT = 255.0;
 
+    private final Runnable onCurveChanged;
+    private final PointCommitListener onPointCommit;
+
     public EditeurCourbe(Pane drawArea, Courbe modele) {
+        this(drawArea, modele, null, null);
+    }
+
+    public EditeurCourbe(Pane drawArea, Courbe modele, Runnable onCurveChanged, PointCommitListener onPointCommit) {
         this.drawArea = drawArea;
         this.modele = modele;
+        this.onCurveChanged = onCurveChanged;
+        this.onPointCommit = onPointCommit;
         this.courbePolyline = new Polyline();
         this.courbePolyline.setStrokeWidth(2.0);
 
@@ -39,9 +52,11 @@ public class EditeurCourbe {
             c.setCenterY(MARGIN + (HEIGHT - p.getY()));
 
             final int ind = i;
+
+            final double[] startY = new double[1];
+            c.setOnMousePressed(event -> startY[0] = modele.getPoints().get(ind).getY());
+
             c.setOnMouseDragged(event -> {
-                double newScreenY = event.getY() + c.getTranslateY();
-                double mouseInPaneY = event.getY() + c.getLayoutY();
                 double currentMouseY = c.getParent().sceneToLocal(event.getSceneX(), event.getSceneY()).getY();
                 double newModelY = HEIGHT - (currentMouseY - MARGIN);
                 modele.setPointY(ind, newModelY);
@@ -49,6 +64,23 @@ public class EditeurCourbe {
                 c.setCenterY(MARGIN + (HEIGHT - validatedModelY));
 
                 dessinerCourbe();
+
+                if (onCurveChanged != null) {
+                    onCurveChanged.run();
+                }
+            });
+
+            c.setOnMouseReleased(event -> {
+                if (onPointCommit == null) {
+                    return;
+                }
+
+                double endY = modele.getPoints().get(ind).getY();
+                if (Math.abs(endY - startY[0]) < 1e-9) {
+                    return;
+                }
+
+                onPointCommit.onPointCommit(modele, ind, startY[0], endY);
             });
 
             drawArea.getChildren().add(c);
