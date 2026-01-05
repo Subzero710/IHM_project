@@ -6,12 +6,17 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polyline;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.RadioMenuItem;
+import javafx.stage.FileChooser;
+
+import java.io.File;
 
 public class MainController {
 
@@ -81,5 +86,23 @@ public class MainController {
         editorRed = new EditeurCourbe(drawAreaRed, modeleRed);
         editorGreen = new EditeurCourbe(drawAreaGreen, modeleGreen);
         editorBlue = new EditeurCourbe(drawAreaBlue, modeleBlue);
+    }
+
+    @FXML
+    private ImageView myImageView;
+
+    @FXML
+    public void setImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Image1");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+        File selectedFile = fileChooser.showOpenDialog(myImageView.getScene().getWindow());
+
+        if (selectedFile != null) {
+            Image image = new Image(selectedFile.toURI().toString());
+            myImageView.setImage(image);
+        }
     }
 }
