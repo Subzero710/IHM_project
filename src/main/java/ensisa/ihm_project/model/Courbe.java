@@ -79,6 +79,28 @@ public class Courbe {
         }
     }
 
+    public int getN() {
+        return n;
+    }
+
+    public double[] snapshotY() {
+        double[] ys = new double[n];
+        for (int i = 0; i < n; i++) {
+            ys[i] = points.get(i).getY();
+        }
+        return ys;
+    }
+
+    public void restoreY(double[] ys) {
+        if (ys == null) {
+            return;
+        }
+        int len = Math.min(ys.length, n);
+        for (int i = 0; i < len; i++) {
+            setPointY(i, ys[i]);
+        }
+    }
+
     public List<Point> getPoints() {
         return points;
     }
